@@ -1,0 +1,14 @@
+server:
+  port: 8082
+
+security:
+  oauth2:
+    resource.jwk.key-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
+    client:
+      clientId: product-client
+      clientSecret: 27917C58F8435247CF2C5C9D0EDF64AE702C005ACFE242110CC9C4F0E7AF2758
+      access-token-uri: http://localhost:8081/sso-auth-server/oauth/token
+      scope: openid
+      grant-type: client_credentials
+      authorized-grant-types:
+        - client_credentials
