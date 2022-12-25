@@ -1,6 +1,10 @@
 server:
   port: 8082
 
+threading:
+  max: 200
+  taskCap: 1000
+
 security:
   oauth2:
     resource.jwk.key-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
@@ -12,3 +16,10 @@ security:
       grant-type: client_credentials
       authorized-grant-types:
         - client_credentials
+
+api:
+  review:
+    host: 'http://localhost:8083'
+  adidas:
+    host: 'https://www.adidas.co.uk'
+    basePath: '/api/products'

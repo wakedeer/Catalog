@@ -1,10 +1,11 @@
 package inno.tech.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.NonNull;
-import org.codehaus.jackson.JsonNode;
-
-import java.util.Optional;
+import reactor.core.publisher.Mono;
 
 public interface ProductService {
-    Optional<JsonNode> findProductData(@NonNull String productId);
+    Mono<JsonNode> findLiveApiData(@NonNull String productId);
+
+    Mono<JsonNode> findRateReport(@NonNull String productId);
 }
