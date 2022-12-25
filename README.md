@@ -60,8 +60,8 @@ docker-compose up -d
 
 ## Authorization
 
-Differentiation of access rights in the microservice **product-reviews** is carried out through setting property *
-*security.oauth2.client.scope** in auth-uaa microservice
+Differentiation of access rights in the microservice **product-reviews** is carried out through setting property
+**security.oauth2.client.scope** in auth-uaa microservice
 
 - ``write`` the access to POST, PUT, DELETE methods is permitted
 - ``read`` all the other methods are permitted
