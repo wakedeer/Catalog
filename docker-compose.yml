@@ -18,12 +18,6 @@ services:
     image: 'wakedeer/auth-uaa:0.0.1'
     ports:
       - '8081:8081'
-    healthcheck:
-      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
-      interval: 20s
-      timeout: 5s
-      retries: 5
-      start_period: 40s
   product-service:
     image: 'wakedeer/product-service:0.0.1'
     environment:
@@ -31,12 +25,6 @@ services:
       API_REVIEW_HOST: 'http://product-reviews:8083'
     ports:
       - '8082:8082'
-    healthcheck:
-      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
-      interval: 20s
-      timeout: 5s
-      retries: 5
-      start_period: 40s
   product-reviews:
     image: 'wakedeer/product-reviews:0.0.1'
     environment:
@@ -48,9 +36,3 @@ services:
       - '8083:8083'
     depends_on:
       - "postgres"
-    healthcheck:
-      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
-      interval: 20s
-      timeout: 5s
-      retries: 5
-      start_period: 40s
