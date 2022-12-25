@@ -15,7 +15,9 @@ public class ProductApiController {
 
     @GetMapping("/product/{product_id}")
     public ResponseEntity<String> getProductInfo(@PathVariable("product_id") String productId) {
+        var review = oAuth2RestTemplate.getForObject("http://localhost:8083/review/1", String.class);
+
         //TODO
-        return ResponseEntity.ok("OK with " + productId);
+        return ResponseEntity.ok("OK with " + productId + " " + review);
     }
 }
