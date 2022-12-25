@@ -5,13 +5,16 @@ threading:
   max: 200
   taskCap: 1000
 
+auth-uaa:
+  uri: http://localhost:8081/sso-auth-server
+
 security:
   oauth2:
-    resource.jwk.key-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json
+    resource.jwk.key-set-uri: ${auth-uaa.uri}/.well-known/jwks.json
     client:
       clientId: product-client
       clientSecret: 27917C58F8435247CF2C5C9D0EDF64AE702C005ACFE242110CC9C4F0E7AF2758
-      access-token-uri: http://localhost:8081/sso-auth-server/oauth/token
+      access-token-uri: ${auth-uaa.uri}/oauth/token
       scope: read,write
       grant-type: client_credentials
       authorized-grant-types:
