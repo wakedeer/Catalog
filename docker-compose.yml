@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  postgres:
+    image: 'postgres:14.1'
+    environment:
+      POSTGRES_DB: 'review'
+      POSTGRES_USER: 'reviewsrv'
+      POSTGRES_PASSWORD: 'HiSEEQB6zh9q2CK!'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  auth-uaa:
+    image: 'wakedeer/auth-uaa:0.0.1'
+    ports:
+      - '8081:8081'
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+  product-service:
+    image: 'wakedeer/product-service:0.0.1'
+    environment:
+      AUTH_UAA_URI: 'http://auth-uaa:8081/sso-auth-server'
+      API_REVIEW_HOST: 'http://product-reviews:8083'
+    ports:
+      - '8082:8082'
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s
+  product-reviews:
+    image: 'wakedeer/product-reviews:0.0.1'
+    environment:
+      AUTH_UAA_URI: 'http://auth-uaa:8081/sso-auth-server'
+      SPRING_DATASOURCE_URL: 'jdbc:postgresql://postgres:5432/review'
+      SPRING_DATASOURCE_USERNAME: 'reviewsrv'
+      SPRING_DATASOURCE_PASSWORD: 'HiSEEQB6zh9q2CK!'
+    ports:
+      - '8083:8083'
+    depends_on:
+      - "postgres"
+    healthcheck:
+      test: "curl --fail --silent localhost:8081/actuator/health | grep UP || exit 1"
+      interval: 20s
+      timeout: 5s
+      retries: 5
+      start_period: 40s

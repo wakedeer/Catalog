@@ -4,4 +4,4 @@ databaseChangeLog:
       author: 'AlekseiMironov'
       changes:
         - sqlFile:
-            path: 'db/changelog/sql/1.0.2-insert-test-data.sql'
+            path: 'db/changelog/sql/1.0.1-insert-test-data.sql'
