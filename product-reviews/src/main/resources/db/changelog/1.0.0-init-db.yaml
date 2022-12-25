@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1.0.0-init-db'
+      author: 'AlekseiMironov'
+      changes:
+        - createTable:
+            tableName: REVIEW
+            columns:
+              - column:
+                  name: ID
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: PRODUCT_ID
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: SCORE
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DETAILS
+                  type: VARCHAR(1000)
+                  constraints:
+                    nullable: true

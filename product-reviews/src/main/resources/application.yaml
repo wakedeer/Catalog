@@ -1,3 +1,15 @@
 server.port: 8083
 
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: 'jdbc:postgresql://localhost:5432/review'
+    username: 'reviewsrv'
+    password: 'HiSEEQB6zh9q2CK!'
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.globally_quoted_identifiers: true
+
 security.oauth2.resource.jwk.key-set-uri: http://localhost:8081/sso-auth-server/.well-known/jwks.json

@@ -1,0 +1,17 @@
+# dev use only
+version: '3.9'
+services:
+  postgres:
+    image: 'postgres:14.1'
+    environment:
+      POSTGRES_DB: 'review'
+      POSTGRES_USER: 'reviewsrv'
+      POSTGRES_PASSWORD: 'HiSEEQB6zh9q2CK!'
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
